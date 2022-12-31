@@ -5,7 +5,7 @@ script_dir=`dirname ${script_path}`
 
 # Set the environment variables
 
-. ${script_dir}/.env
+. ${script_dir}/../.env
 
 podman run -d \
            --rm \

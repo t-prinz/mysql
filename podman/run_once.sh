@@ -17,4 +17,3 @@ sudo restorecon -R ${script_dir}/mysql_data
 # podman inspect registry.redhat.io/rhel9/mysql-80 |grep '"User"'
 
 podman unshare chown -R 27.27 ${script_dir}/mysql_data
-
