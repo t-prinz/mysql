@@ -1,17 +1,20 @@
 #!/bin/bash
 
-echo $0
-
 script_path=`readlink -f ${BASH_SOURCE:-$0}`
-echo "Full path to script:  ${script_path}"
-
 script_dir=`dirname ${script_path}`
 
-echo "Location of script:  ${script_dir}"
+echo "Creating database files in directory:  ${script_dir}/mysql_data"
 
+mkdir ${script_dir}/mysql_data
 
-#sudo semanage fcontext --add -t container_file_t '/home/tprinz/mysql/podman/mysql_data(/.*)?'
-#sudo restorecon -R /home/tprinz/mysql/podman/mysql_data
+# Change SELinux file context
 
-#podman unshare chown -R 27.27 mysql_data
+sudo semanage fcontext --add -t container_file_t "${script_dir}/mysql_data(/.*)?"
+sudo restorecon -R ${script_dir}/mysql_data
+
+# Change ownership of directory; inspect the image to obtain this:
+#
+# podman inspect registry.redhat.io/rhel9/mysql-80 |grep '"User"'
+
+podman unshare chown -R 27.27 ${script_dir}/mysql_data
 
