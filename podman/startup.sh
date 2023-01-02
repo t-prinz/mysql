@@ -23,4 +23,4 @@ sleep 5
 
 # Initialize the database
 
-podman exec -i mysql mysql -u${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE} < ../initialize_db.sql
+podman exec -i mysql mysql -u${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE} < ${script_dir}/../initialize_db.sql
